@@ -19,6 +19,7 @@
   "homepage": "https://github.com/santi6291/speed-tester#readme",
   "dependencies": {
     "cron-job-manager": "^1.0.7",
+    "dotenv": "^2.0.0",
     "speedtest-net": "^1.2.8"
   }
 }
