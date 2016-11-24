@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/santi6291/speed-tester/issues"
   },
-  "homepage": "https://github.com/santi6291/speed-tester#readme"
+  "homepage": "https://github.com/santi6291/speed-tester#readme",
+  "dependencies": {
+    "cron-job-manager": "^1.0.7",
+    "speedtest-net": "^1.2.8"
+  }
 }
