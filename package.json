@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/santi6291/speed-tester.git"
@@ -20,6 +18,10 @@
   "dependencies": {
     "cron-job-manager": "^1.0.7",
     "dotenv": "^2.0.0",
+    "moment": "^2.17.0",
     "speedtest-net": "^1.2.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
