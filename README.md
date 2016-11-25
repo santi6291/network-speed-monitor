@@ -8,7 +8,7 @@
 |____ email.js     -> Compile report and send email (maybe use third party service)
 |____ results      -> Store monthly csv
 |____.env          -> store app variables
-|________ YYMMDD-report.csv -> 161225-report.csv, this format enable better sorting
+|________ YYMM-report.csv -> 1612-report.csv, this format enable better sorting
 ```
 
 ## Install
@@ -27,7 +27,6 @@
 		1. unix timestamp
 		2. upload
 		3. download
-		4. ping
 	2. split files into months
 
 ## Email
