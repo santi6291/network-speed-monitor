@@ -19,6 +19,7 @@
     "dotenv": "^2.0.0",
     "moment": "^2.17.0",
     "node-schedule": "^1.2.0",
+    "sendgrid": "^4.7.1",
     "speedtest-net": "^1.2.8"
   },
   "devDependencies": {
