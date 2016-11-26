@@ -3,13 +3,13 @@ const fs = require('fs');
 const speedTest = require('speedtest-net');
 const moment = require('moment');
 
-module.exports = class SpeedTest{
+class SpeedTest{
 	constructor(){
 		this.csvheader = 'timestamp,download,upload\n';
 		// time test was ran
-		this.timestamp = new Date().getTime();
+		this.timestamp = moment()//new Date().getTime();
 		// CSV file name
-		this.fileName = moment(this.timestamp).format(process.env.MOMENT_FORMAT) + process.env.FILE_NAME;
+		this.fileName = this.timestamp.format(process.env.MOMENT_FORMAT) + process.env.FILE_NAME;
 		// Where CSV files get stored
 		this.filePath = `${process.env.REPORT_PATH}/${this.fileName}`;
 		// Run test
@@ -22,7 +22,8 @@ module.exports = class SpeedTest{
 	}
 
 	csvString(data){
-		return `${this.timestamp},${data.download},${data.upload}\n`
+		const unix = this.timestamp.format('x');
+		return `${unix},${data.download},${data.upload}\n`
 	}
 	
 	/**
@@ -76,3 +77,5 @@ module.exports = class SpeedTest{
 		});
 	}
 }
+
+module.exports = SpeedTest
