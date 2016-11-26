@@ -40,6 +40,7 @@ class CsvToJson{
 
 class EmailResults {
 	constructor(){
+		console.log('EmailResults - Starting');
 		this.currentTime = moment();
 		this.lastMonth = this.currentTime.subtract(1, 'month');
 		this.fileName = this.lastMonth.format(process.env.MOMENT_FORMAT) + process.env.FILE_NAME;
@@ -73,6 +74,7 @@ class EmailResults {
 	}
 
 	sendEmail(){
+		console.log('EmailResults - Sending Email');
 		let from_email = new helper.Email(process.env.SENDGRID_FROM_EMAIL);
 		let to_email = new helper.Email(process.env.SENDGRID_TO_EMAIL);
 		let subject = 'Network Statistics - ' + this.lastMonth.format('YYYY - MM');
@@ -88,6 +90,7 @@ class EmailResults {
 
 		sg.API(request, (error, response)=>{
 			if (error) throw error;
+			console.log('EmailResults - Email Sent');
 		});
 	}
 
@@ -100,7 +103,6 @@ class EmailResults {
 			<strong>Upload</strong>: ${this.uploadAvg}/${process.env.UPLOAD_SPEED}  = ${this.uploadAvg/process.env.UPLOAD_SPEED*100}%\n
 		</p>`;
 	}
-
 }
-new EmailResults();
-// module.exports = EmailResults
+
+module.exports = EmailResults

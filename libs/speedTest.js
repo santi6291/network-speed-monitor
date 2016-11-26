@@ -5,6 +5,7 @@ const moment = require('moment');
 
 class SpeedTest{
 	constructor(){
+		console.log('SpeedTest - Starting network Speed Test');
 		this.csvheader = 'timestamp,download,upload\n';
 		// time test was ran
 		this.timestamp = moment()//new Date().getTime();
@@ -59,6 +60,7 @@ class SpeedTest{
 	 * @param {String} csvLine timestamp,download,upload values
 	 */
 	writeTo (csvLine) {
+		console.log('SpeedTest - Appending to CSV file');;
 		fs.appendFile(this.filePath, csvLine, err=>{
 			this.onError(err);
 		});
@@ -69,11 +71,12 @@ class SpeedTest{
 	 * @param {String} csvLine timestamp,download,upload values
 	 */
 	writeNew (csvLine) {
+		console.log('SpeedTest - Creating new CSV file');;
 		this.csvheader += csvLine;
 		fs.writeFile(this.filePath, this.csvheader, err=>{
 			this.onError(err);
 		});
 	}
 }
-new SpeedTest()
+
 module.exports = SpeedTest
