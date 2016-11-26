@@ -3,65 +3,76 @@ const fs = require('fs');
 const speedTest = require('speedtest-net');
 const moment = require('moment');
 
-// time test was ran
-const timestamp = new Date().getTime();
-// CSV file name
-const fileName = moment(timestamp).format(process.env.MOMENT_FORMAT) + process.env.FILE_NAME;
-// Where CSV files get stored
-const filePath = `${process.env.REPORT_PATH}/${fileName}`;
+module.exports = class SpeedTest{
+	constructor(){
+		this.csvheader = 'timestamp,download,upload\n';
+		// time test was ran
+		this.timestamp = new Date().getTime();
+		// CSV file name
+		this.fileName = moment(this.timestamp).format(process.env.MOMENT_FORMAT) + process.env.FILE_NAME;
+		// Where CSV files get stored
+		this.filePath = `${process.env.REPORT_PATH}/${this.fileName}`;
+		// Run test
+		this.runTest = speedTest({maxTime: process.env.MAXTIME});
 
-// Run test
-const runTest = speedTest({maxTime: process.env.MAXTIME});
+		// Received data call back
+		this.runTest.on('data', data=>this.onData(data));
+		// error callback
+		this.runTest.on('error', error=>this.onError(error));
+	}
 
-/**
- * When data received data write to csv or create new csv
- * @param  {Object} data Response from speed test
- */
-const onData = function(data) {
-	let download = data.speeds.download;
-	let upload = data.speeds.upload;
-	let csvLine = `${timestamp},${download},${upload}\n`;
+	csvString(data){
+		return `${this.timestamp},${data.download},${data.upload}\n`
+	}
 	
-	fs.stat(filePath, (err, stats)=>{
+	/**
+	 * When data received data write to csv or create new csv
+	 * @param  {Object} data Response from speed test
+	 */
+	onData(data) {
+		let csvLine = this.csvString({
+			download: data.speeds.download,
+			upload: data.speeds.upload
+		}) 
+		
+		fs.stat(this.filePath, (err, stats)=>{
+			if (!!err) {
+				this.writeNew(csvLine)
+			} else {
+				this.writeTo(csvLine)
+			}
+		})
+	}
+	
+	/**
+	 * Simple error Loggin function
+	 * @param  {String} err Descrive error
+	 */
+	onError(err) {
 		if (!!err) {
-			WriteNew(csvLine)
-		} else {
-			WriteTo(csvLine)
+			throw err;
+			process.exit(1);
 		}
-	})
-}
-/**
- * Simple error Loggin function
- * @param  {String} err Descrive error
- */
-const onError = function (err) {
-	console.error(err);
-	process.exit(1);
-}
+	}
 
-/**
- * Append test data to existing file
- * @param {String} csvLine timestamp,download,upload values
- */
-const WriteTo = function (csvLine) {
-	console.log(WriteTo)
-	fs.appendFile(filePath, csvLine, onError);
-	process.exit(0);
-}
+	/**
+	 * Append test data to existing file
+	 * @param {String} csvLine timestamp,download,upload values
+	 */
+	writeTo (csvLine) {
+		fs.appendFile(this.filePath, csvLine, err=>{
+			this.onError(err);
+		});
+	}
 
-/**
- * Create new scv file with header and values
- * @param {String} csvLine timestamp,download,upload values
- */
-const WriteNew = function (csvLine) {
-	console.log(WriteNew)
-	let csvData = 'timestamp,download,upload\n';
-	csvData += csvLine;
-	fs.writeFile(filePath, csvData, onError);
-	process.exit(0);
+	/**
+	 * Create new scv file with header and values
+	 * @param {String} csvLine timestamp,download,upload values
+	 */
+	writeNew (csvLine) {
+		this.csvheader += csvLine;
+		fs.writeFile(this.filePath, this.csvheader, err=>{
+			this.onError(err);
+		});
+	}
 }
-
-// Received data call back
-runTest.on('data', onData);
-// error callback
-runTest.on('error', onError);
