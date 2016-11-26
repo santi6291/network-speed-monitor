@@ -1,36 +1,45 @@
 # Network Speed test
 
-## Files
+Get what you pay, Periodic network speed check to average your networks performance.
+
+## Installing
+
+recommended to install on continuously running device like Raspberry-Pi etc, 
+
+Clone and remove `.git` directory
+
+```bash
+>$ git clone git@github.com:santi6291/network-speed-tester.git
+>$ cd network-speed-tester && rm -rf .git
+```
+
+This project is using [dotenv](https://www.npmjs.com/package/dotenv) to keep all credentials and configurations private and easily assessable 
 
 ```
-|____ cron.js      -> (un)install cron task
-|____ speedTest.js -> Check network speed
-|____ email.js     -> Compile report and send email (maybe use third party service)
-|____ results      -> Store monthly csv
-|____.env          -> store app variables
-|________ YYMM-report.csv -> 1612-report.csv, this format enable better sorting
+cp .env-example .env
 ```
 
-## Install
+And lastly run `npm install`, this will install dependencies and run forever.js, when the script is initiated it will execute once and then on schedule.
 
-1. Set cron task
-	1. check speed every 4 hours
-	2. email results monthly
-2. Create .env file
+## Goal
+I often get very frustrated when my network is not performing to what I'm paying. The goal is to have analytics and get your internet provider to step up their game or get some $$ back :) 
 
-## speed Test
+## Breakdown
 
-1. Run speed test
-2. check upload, download, ping
-3. write results to CSV
-	1. cols: 
-		1. unix timestamp
-		2. upload
-		3. download
-	2. split files into months
+There are four main components **dotenv**, **cron job**, **email reports**, and **network test**,
 
-## Email
+### [dotenv](https://www.npmjs.com/package/dotenv)
 
-1. Average results
-2. Compare to expected up/down load speed (.env)
-3. send using third party email service
+All configuration and credential are kept in a `.env` file which is ignored, this is to ensure to private information is ever shared!
+
+
+### [Cron Job](https://github.com/node-schedule/node-schedule)
+
+node-schedule uses cron syntax but does not write cron jobs. To clarify if you run `>$ crontab -l` no new cron jobs will be written and terminating the forever task will stop the cron jobs
+
+### Email Reports
+
+Personally using [sendgrid API](https://github.com/sendgrid/sendgrid-nodejs), mainly since they allow 12K email for free per month and you don't have to worry about your email going to spam. feel free to open Pull Request for other mail service integrations
+
+### Network test
+using [speedtest-net](https://github.com/ddsol/speedtest.net) to run network test as of v1.0 we are only checking for download and upload speeds. There is other network information available which I did not find important.
