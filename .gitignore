@@ -38,3 +38,6 @@ jspm_packages
 
 #ignore .env file
 .env
+
+#ignore results files
+results/*
