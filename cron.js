@@ -1,13 +1,15 @@
 require('dotenv').config();
+const cron = require('node-schedule');
+
 const SpeedTask = require('./speedTest');
 const EmailTask = require('./email');
-const CronJobManager = require('cron-job-manager');
 
 var manager = new CronJobManager();
-manager.add(process.env.CRON_SPEED_TEST_KEY, process.env.CRON_SPEED_TEST_SCHEDULE, ()=>new SpeedTask())
-manager.start(process.env.CRON_SPEED_TEST_KEY)
-
-// manager.add(process.env.CRON_EMAIL_RESULTS_KEY, process.env.CRON_EMAIL_RESULTS_SCHEDULE, ()=>new speedTest())
-// manager.start(process.env.CRON_EMAIL_RESULTS_KEY)
-
-console.log(manager.listCrons())
+const speedCron = cron.scheduleJob(process.env.CRON_SPEED_TEST_SCHEDULE, ()=>{
+	console.log('SpeedTask');
+	new SpeedTask();
+})
+const emailCron = cron.scheduleJob(process.env.CRON_EMAIL_RESULTS_SCHEDULE, ()=>{
+	console.log('EmailTask');
+	new EmailTask();
+})
