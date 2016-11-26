@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "postinstall": "npm start",
+    "start": "node_modules/.bin/forever start -v -o ./logs/out.log -e ./logs/err.log index.js",
+    "stop": "node_modules/.bin/forever stop index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/santi6291/speed-tester.git"
@@ -17,6 +21,7 @@
   "homepage": "https://github.com/santi6291/speed-tester#readme",
   "dependencies": {
     "dotenv": "^2.0.0",
+    "forever": "^0.15.3",
     "moment": "^2.17.0",
     "node-schedule": "^1.2.0",
     "sendgrid": "^4.7.1",
