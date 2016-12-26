@@ -65,6 +65,7 @@ class SpeedTest{
 		log('SpeedTest - Appending to CSV file');
 		fs.appendFile(this.filePath, csvLine, err=>{
 			this.onError(err);
+			log('SpeedTest - Finished');
 		});
 	}
 
@@ -77,6 +78,7 @@ class SpeedTest{
 		this.csvheader += csvLine;
 		fs.writeFile(this.filePath, this.csvheader, err=>{
 			this.onError(err);
+			log('SpeedTest - Finished');
 		});
 	}
 }
