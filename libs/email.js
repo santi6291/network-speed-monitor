@@ -2,6 +2,9 @@ require('dotenv').config();
 const fs = require('fs');
 const moment = require('moment');
 const helper = require('sendgrid').mail;
+
+const log = require('./log.js');
+
 var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 class CsvToJson{
@@ -40,7 +43,7 @@ class CsvToJson{
 
 class EmailResults {
 	constructor(){
-		console.log('EmailResults - Starting');
+		log('EmailResults - Starting');
 		this.currentTime = moment();
 		this.lastMonth = this.currentTime.subtract(1, 'month');
 		this.fileName = this.lastMonth.format(process.env.MOMENT_FORMAT) + process.env.FILE_NAME;
@@ -55,10 +58,17 @@ class EmailResults {
 	}
 
 	getFileCB(err, data){
-		if (err) throw err;
+		if (err) {
+			this.noFile(err)
+			return
+		} 
 		let csvJson = new CsvToJson(data.toString())
 		this.results = csvJson.getData();
 		this.doAverages();
+	}
+
+	noFile(err){
+		log(err.toString());
 	}
 
 	doAverages(){
@@ -74,7 +84,7 @@ class EmailResults {
 	}
 
 	sendEmail(){
-		console.log('EmailResults - Sending Email');
+		log('EmailResults - Sending Email');
 		let from_email = new helper.Email(process.env.SENDGRID_FROM_EMAIL);
 		let to_email = new helper.Email(process.env.SENDGRID_TO_EMAIL);
 		let subject = 'Network Statistics - ' + this.lastMonth.format('YYYY - MM');
@@ -90,7 +100,7 @@ class EmailResults {
 
 		sg.API(request, (error, response)=>{
 			if (error) throw error;
-			console.log('EmailResults - Email Sent');
+			log('EmailResults - Email Sent');
 		});
 	}
 
