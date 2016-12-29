@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/santi6291/speed-tester#readme",
   "dependencies": {
+    "cron": "git+https://github.com/kelektiv/node-cron.git",
     "dotenv": "^2.0.0",
     "forever": "^0.15.3",
     "moment": "^2.17.0",
