@@ -6,7 +6,8 @@
   "scripts": {
     "postinstall": "npm start",
     "start": "node_modules/.bin/forever start -va -l $(pwd)/logs/logs.log -o $(pwd)/logs/out.log -e $(pwd)/logs/err.log index.js",
-    "stop": "node_modules/.bin/forever stop index.js"
+    "stop": "node_modules/.bin/forever stop index.js",
+    "test": "node_modules/.bin/forever list && cat ./logs/out.log"
   },
   "repository": {
     "type": "git",
