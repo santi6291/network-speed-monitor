@@ -9,5 +9,5 @@ module.exports = (msg)=>{
 	const msgString = `[${timestamp}] ${msg}\n`;
 	
 	console.log(msgString);
-	return fs.appendFileSync(process.env.REPORT_PATH + '/logs.log', msgString);
+	return fs.appendFileSync(process.env.LOGS_PATH + '/logs.log', msgString);
 }
