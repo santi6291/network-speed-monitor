@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const moment = require('moment');
 const fs = require('fs');
 
@@ -7,5 +9,5 @@ module.exports = (msg)=>{
 	const msgString = `[${timestamp}] ${msg}\n`;
 	
 	console.log(msgString);
-	return fs.appendFileSync('./logs/logs.log', msgString);
+	return fs.appendFileSync(process.env.REPORT_PATH + '/logs.log', msgString);
 }
