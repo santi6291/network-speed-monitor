@@ -21,13 +21,12 @@
   },
   "homepage": "https://github.com/santi6291/speed-tester#readme",
   "dependencies": {
-    "cron": "git+https://github.com/kelektiv/node-cron.git",
     "dotenv": "^2.0.0",
     "forever": "^0.15.3",
     "moment": "^2.17.0",
-    "node-schedule": "^1.2.0",
     "sendgrid": "^4.7.1",
-    "speedtest-net": "^1.2.8"
+    "speedtest-net": "^1.2.8",
+    "yargs": "^6.6.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
