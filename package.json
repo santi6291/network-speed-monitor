@@ -1,28 +1,24 @@
 {
-  "name": "speed-tester",
+  "name": "network-speed-tester",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm start",
-    "start": "node_modules/.bin/forever start -va -l $(pwd)/logs/logs.log -o $(pwd)/logs/out.log -e $(pwd)/logs/err.log index.js",
-    "stop": "node_modules/.bin/forever stop index.js",
-    "test": "node_modules/.bin/forever list && cat ./logs/out.log"
+    "test": "cat ./logs/out.log"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/santi6291/speed-tester.git"
+    "url": "git+https://github.com/santi6291/network-speed-tester.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["network", "wifi", "speed", "test"],
+  "author": "Santiago J Sosa",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/santi6291/speed-tester/issues"
+    "url": "https://github.com/santi6291/network-speed-tester/issues"
   },
-  "homepage": "https://github.com/santi6291/speed-tester#readme",
+  "homepage": "https://github.com/santi6291/network-speed-tester#readme",
   "dependencies": {
     "dotenv": "^2.0.0",
-    "forever": "^0.15.3",
     "moment": "^2.17.0",
     "sendgrid": "^4.7.1",
     "speedtest-net": "^1.2.8",
