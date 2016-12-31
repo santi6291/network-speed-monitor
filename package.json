@@ -6,9 +6,7 @@
   "scripts": {
     "test": "cat ./logs/out.log"
   },
-  "bin": {
-    "network-speed-test": "./index.js"
-  },
+  "bin": "/Users/santiago/Sites/projects/speed-tester/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/santi6291/network-speed-tester.git"
