@@ -3,7 +3,7 @@ const fs = require('fs');
 const moment = require('moment');
 const helper = require('sendgrid').mail;
 
-const log = require('./log.js');
+const log = require(process.env.PROJECT_ROOT+'/log');
 
 var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 

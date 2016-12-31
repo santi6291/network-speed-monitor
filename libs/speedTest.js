@@ -3,7 +3,7 @@ const fs = require('fs');
 const speedTest = require('speedtest-net');
 const moment = require('moment');
 
-const log = require('./log.js');
+const log = require(process.env.PROJECT_ROOT+'/log');
 
 class SpeedTest{
 	constructor(){
