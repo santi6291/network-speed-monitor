@@ -3,7 +3,7 @@ const fs = require('fs');
 const speedTest = require('speedtest-net');
 const moment = require('moment');
 
-const log = require(process.env.PROJECT_ROOT+'/log');
+const log = require(process.env.PROJECT_ROOT+'/libs/log');
 
 class SpeedTest{
 	constructor(){
@@ -14,7 +14,7 @@ class SpeedTest{
 		// CSV file name
 		this.fileName = this.timestamp.format(process.env.MOMENT_FORMAT) + process.env.FILE_NAME;
 		// Where CSV files get stored
-		this.filePath = `${process.env.REPORT_PATH}/${this.fileName}`;
+		this.filePath = `${process.env.PROJECT_ROOT}${process.env.REPORT_PATH}/${this.fileName}`;
 		// Run test
 		this.runTest = speedTest({maxTime: process.env.MAXTIME});
 

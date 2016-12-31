@@ -3,7 +3,7 @@ const fs = require('fs');
 const moment = require('moment');
 const helper = require('sendgrid').mail;
 
-const log = require(process.env.PROJECT_ROOT+'/log');
+const log = require(process.env.PROJECT_ROOT+'/libs/log');
 
 var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
@@ -48,7 +48,7 @@ class EmailResults {
 		this.lastMonth = this.currentTime.subtract(1, 'month');
 		this.fileName = this.lastMonth.format(process.env.MOMENT_FORMAT) + process.env.FILE_NAME;
 		// Where CSV files get stored
-		this.filePath = `${process.env.REPORT_PATH}/${this.fileName}`;
+		this.filePath = `${process.env.PROJECT_ROOT}${process.env.REPORT_PATH}/${this.fileName}`;
 		this.results;
 		this.downloadAvg = 0;
 		this.uploadAvg = 0;
