@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require('dotenv').config();
 const argv = require('yargs').argv;
 
