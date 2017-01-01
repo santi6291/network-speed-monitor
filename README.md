@@ -6,11 +6,10 @@ Get what you pay, Periodic network speed check to average your networks performa
 
 recommended to install on continuously running device like Raspberry-Pi etc, 
 
-Clone and remove `.git` directory
+Clone
 
 ```bash
 >$ git clone git@github.com:santi6291/network-speed-tester.git
->$ cd network-speed-tester && rm -rf .git
 ```
 
 This project is using [dotenv](https://www.npmjs.com/package/dotenv) to keep all credentials and configurations private and easily assessable 
@@ -19,7 +18,14 @@ This project is using [dotenv](https://www.npmjs.com/package/dotenv) to keep all
 cp .env-example .env
 ```
 
-And lastly run `npm install`, this will install dependencies and run forever.js, when the script is initiated it will execute once and then on schedule.
+run `npm install`, this will install dependencies
+ 
+Due to consistency issues using built in `crontab` to run crons here are sample crons
+
+```
+0 */1 * * * /home/pi/network-speed-tester/index.js > /home/pi/network-speed-tester/logs/speed-test-stdout.log 2>/home/pi/network-speed-tester/logs/speed-test-stderr.log
+0 0 1 */1 * /home/pi/network-speed-tester/index.js --email > /home/pi/network-speed-tester/logs/email-stdout.log 2>/home/pi/network-speed-tester/logs/email-stderr.log
+```
 
 ## Goal
 I often get very frustrated when my network is not performing to what I'm paying. The goal is to have analytics and get your internet provider to step up their game or get some $$ back :) 
