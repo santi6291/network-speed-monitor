@@ -1,6 +1,6 @@
-#!/usr/bin/env node
-require('dotenv').config();
 #!/usr/bin/env /usr/local/bin/node
+
+require('dotenv').config({path: __dirname+'/.env'});
 const argv = require('yargs').argv;
 
 const log = require(process.env.PROJECT_ROOT+'/libs/log');
