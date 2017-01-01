@@ -1,4 +1,4 @@
-#!/usr/bin/env /usr/local/bin/node
+#!/usr/bin/env /usr/bin/node
 
 require('dotenv').config({path: __dirname+'/.env'});
 const argv = require('yargs').argv;
