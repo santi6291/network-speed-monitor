@@ -1,4 +1,4 @@
-# Network Speed test
+# Network Speed Monitor
 
 Get what you pay, Periodic network speed check to average your networks performance.
 
@@ -9,7 +9,7 @@ recommended to install on continuously running device like Raspberry-Pi etc,
 Clone
 
 ```bash
->$ git clone git@github.com:santi6291/network-speed-tester.git
+>$ git clone git@github.com:santi6291/network-speed-monitor.git
 ```
 
 This project is using [dotenv](https://www.npmjs.com/package/dotenv) to keep all credentials and configurations private and easily assessable 
